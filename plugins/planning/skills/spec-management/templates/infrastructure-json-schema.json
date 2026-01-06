@@ -1,0 +1,145 @@
+{
+  "$schema": "Infrastructure.json schema for dev-lifecycle-marketplace",
+  "$version": "1.0.0",
+
+  "project": "{project-name}",
+  "generated_at": "{ISO datetime}",
+  "description": "Infrastructure components required by features",
+
+  "phases": {
+    "_comment": "Infrastructure grouped by phase for build ordering",
+    "0": ["I001", "I002", "I003"],
+    "1": ["I010", "I011"],
+    "2": ["I020", "I021"],
+    "3": ["I030"],
+    "4": ["I040"],
+    "5": ["I050"]
+  },
+
+  "infrastructure": [
+    {
+      "id": "I001",
+      "name": "{infrastructure-name}",
+      "description": "{what this infrastructure does}",
+      "category": "auth | cache | database | ai | monitoring | security | storage | messaging",
+      "phase": 0,
+      "priority": "P0 | P1 | P2",
+      "status": "planned | in_progress | completed",
+
+      "blocks_features": ["F001", "F010", "F020"],
+      "depends_on": [],
+
+      "components": [
+        {
+          "name": "{component-name}",
+          "type": "{service | library | config}",
+          "description": "{what it does}"
+        }
+      ],
+
+      "environment_variables": [
+        "{SERVICE}_URL",
+        "{SERVICE}_API_KEY",
+        "{SERVICE}_SECRET"
+      ],
+
+      "health_check": {
+        "endpoint": "/health/{service}",
+        "expected_status": 200
+      },
+
+      "documentation": {
+        "internal": "docs/infrastructure/{name}.md",
+        "external": "{external-docs-url}"
+      },
+
+      "estimated_hours": 8,
+      "spec_path": "specs/infrastructure/phase-{N}/{id}-{name}/"
+    }
+  ],
+
+  "categories": {
+    "auth": {
+      "description": "Authentication and authorization",
+      "examples": ["Clerk", "Supabase Auth", "JWT"]
+    },
+    "cache": {
+      "description": "Caching and session storage",
+      "examples": ["Redis", "Memcached"]
+    },
+    "database": {
+      "description": "Data storage and retrieval",
+      "examples": ["Supabase", "PostgreSQL", "MongoDB"]
+    },
+    "ai": {
+      "description": "AI/ML services and models",
+      "examples": ["Google Gemini", "Claude", "Mem0", "File Search"]
+    },
+    "monitoring": {
+      "description": "Observability and alerting",
+      "examples": ["Sentry", "LangSmith", "OpenTelemetry"]
+    },
+    "security": {
+      "description": "Security infrastructure",
+      "examples": ["RLS policies", "Rate limiting", "Input validation"]
+    },
+    "storage": {
+      "description": "File and media storage",
+      "examples": ["Supabase Storage", "S3", "Cloudflare R2"]
+    },
+    "messaging": {
+      "description": "Background jobs and queues",
+      "examples": ["Celery", "Redis Queue", "Bull"]
+    }
+  },
+
+  "infrastructure_summary": {
+    "total_items": 0,
+    "by_category": {
+      "auth": 0,
+      "cache": 0,
+      "database": 0,
+      "ai": 0,
+      "monitoring": 0,
+      "security": 0,
+      "storage": 0,
+      "messaging": 0
+    },
+    "by_phase": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    "completed": 0,
+    "in_progress": 0,
+    "planned": 0
+  },
+
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "{ISO date}",
+    "update_frequency": "On infrastructure add/update"
+  },
+
+  "_schema_notes": {
+    "phases": {
+      "description": "Infrastructure is built in phases, lower phases first",
+      "rule": "Phase 0 = foundation (auth, database), Phase 5 = advanced (AI evals)"
+    },
+    "blocks_features": {
+      "description": "List of feature IDs that cannot be built until this infrastructure exists",
+      "sync": "Must stay in sync with features.json infrastructure_dependencies"
+    },
+    "categories": {
+      "description": "Logical grouping for infrastructure items",
+      "use": "Helps organize and filter infrastructure by type"
+    },
+    "build_order": {
+      "rule": "Build Phase 0 infrastructure first, then Phase 1, etc.",
+      "constraint": "Features blocked until their required infrastructure phase is complete"
+    }
+  }
+}

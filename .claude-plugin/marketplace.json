@@ -1,0 +1,30 @@
+{
+  "name": "planning-marketplace",
+  "version": "1.0.0",
+  "description": "Planning tools for feature specifications, architecture design, ADRs, and project roadmaps",
+  "owner": {
+    "name": "vanman2024",
+    "email": "noreply@planning-marketplace.dev"
+  },
+  "plugins": [
+    {
+      "name": "planning",
+      "description": "Feature specification, architecture design, decision documentation, and roadmap planning with multi-agent coordination and template-driven workflows",
+      "version": "1.0.0",
+      "author": {
+        "name": "vanman2024"
+      },
+      "source": "./plugins/planning",
+      "category": "development",
+      "keywords": [
+        "planning",
+        "specifications",
+        "architecture",
+        "adr",
+        "roadmap",
+        "features",
+        "documentation"
+      ]
+    }
+  ]
+}
